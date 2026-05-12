@@ -1,7 +1,7 @@
 # The Torchbearer
 
-**Student Name:** ___________________________
-**Student ID:** ___________________________
+**Student Name:** Javier Garcia Ramirez
+**Student ID:** 828165956
 **Course:** CS 460 – Algorithms | Spring 2026
 
 > This README is your project documentation. Write it the way a developer would document
@@ -17,13 +17,13 @@
 > per question. Each bullet should be 1-2 sentences max.
 
 - **Why a single shortest-path run from S is not enough:**
-  _Your answer here._
+  _The problem type requires shortest-path to visit a set of required nodes, not shortest paths from S to other nodes. A single shortest-path run would give you the most efficient ways to connect to other nodes from Start but not how to reach required nodes._
 
 - **What decision remains after all inter-location costs are known:**
-  _Your answer here._
+  _Deciding the optimal order in which to visit locations._
 
 - **Why this requires a search over orders (one sentence):**
-  _Your answer here._
+  _To find the best order you must compare all different order combinations because different orders of locations visited may yield different costs._
 
 ---
 
@@ -35,8 +35,8 @@
 
 | Source Node Type | Why it is a source |
 |---|---|
-| _node type_ | _one-line reason_ |
-| _node type_ | _one-line reason_ |
+| _S_ | _Required start node_ |
+| _Rk_ | _Find optimal distances to to other required nodes_ |
 
 ### Part 2b: Distance Storage
 
@@ -44,20 +44,20 @@
 
 | Property | Your answer |
 |---|---|
-| Data structure name | |
-| What the keys represent | |
-| What the values represent | |
-| Lookup time complexity | |
-| Why O(1) lookup is possible | |
+| Data structure name | _dictionaries_ |
+| What the keys represent | _source/destination nodes_ |
+| What the values represent | _shortest distances to other nodes_ |
+| Lookup time complexity | _O(1)_ |
+| Why O(1) lookup is possible | _use unique keys to lookup single value for desired destination_ |
 
 ### Part 2c: Precomputation Complexity
 
 > State the total complexity and show the arithmetic. Two to three lines max.
 
-- **Number of Dijkstra runs:** _your answer_
-- **Cost per run:** _your answer_
-- **Total complexity:** _your answer_
-- **Justification (one line):** _your answer_
+- **Number of Dijkstra runs:** _Rk + 1_
+- **Cost per run:** _O(m log n)_
+- **Total complexity:** _O(m log n + k (m log n) )_
+- **Justification (one line):** _Djikstra's runs once from source node and then runs once for each required node_
 
 ---
 

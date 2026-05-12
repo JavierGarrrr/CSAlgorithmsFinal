@@ -10,12 +10,12 @@
 
 ---
 
-## Entry 1 – [Date]: Initial Plan
+## Entry 1 – [5/12/26]: Initial Plan
 
 > Required. Write this before writing any code. Describe your plan: what you will
 > implement first, what parts you expect to be difficult, and how you plan to test.
 
-_Your entry here._
+_I will work on the precomputation first, such as distance storage, the djikstra's algorithm and the source node list. These are the core mechanisms of the program so it is important that they function correctly before anything else. I plan to test them on a simple sample weighted graph. The parts I expect to be most difficult are 5 and 6, with keeping state and actually searching._
 
 ---
 
