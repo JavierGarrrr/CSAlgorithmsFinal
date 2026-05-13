@@ -19,12 +19,12 @@ _I will work on the precomputation first, such as distance storage, the djikstra
 
 ---
 
-## Entry 2 – [Date]: [Short description]
+## Entry 2 – [5/12/26]: [precompute_distances bug]
 
 > Required. At least one entry must describe a bug, wrong assumption, or design change
 > you encountered. Describe what went wrong and how you resolved it.
 
-_Your entry here._
+_When testing code for Part 2 a-c, the program would throw a traceback error. It turns out in the precompute distances function, when calling run dijkstra for each source, I accidentally left the parameter field empty. After the fix, I verified that my code was working properly by running it on some test graphs_
 
 ---
 
