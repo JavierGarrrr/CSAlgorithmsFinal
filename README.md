@@ -128,9 +128,9 @@ _A correct route is built using multiple found shortest distances, so if the dis
 
 | Component | Variable name in code | Data type | Description |
 |---|---|---|---|
-| Current location | | | |
-| Relics already collected | | | |
-| Fuel cost so far | | | |
+| Current location | node | tuple | information about location in graph |
+| Relics already collected | relics_remaining | set | relics left to visit |
+| Fuel cost so far | cost_so_far | float | tracks total cost |
 
 ### Part 5b: Data Structure for Visited Relics
 
@@ -138,18 +138,18 @@ _A correct route is built using multiple found shortest distances, so if the dis
 
 | Property | Your answer |
 |---|---|
-| Data structure chosen | |
-| Operation: check if relic already collected | Time complexity: |
-| Operation: mark a relic as collected | Time complexity: |
-| Operation: unmark a relic (backtrack) | Time complexity: |
-| Why this structure fits | |
+| Data structure chosen | set |
+| Operation: check if relic already collected | Time complexity: O(1) |
+| Operation: mark a relic as collected | Time complexity: O(1) |
+| Operation: unmark a relic (backtrack) | Time complexity: O(1) |
+| Why this structure fits | set uses hashing for quick lookup and keeping only unique values, good for variable that will be called often |
 
 ### Part 5c: Worst-Case Search Space
 
 > Two bullets.
 
-- **Worst-case number of orders considered:** _Your answer (in terms of k)._
-- **Why:** _One-line justification._
+- **Worst-case number of orders considered:** _k!._
+- **Why:** _Where k represents all required nodes, factorial of k is every combination for k required nodes_
 
 ---
 
