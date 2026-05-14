@@ -72,29 +72,29 @@
 > Do not copy the invariant text from the spec.
 
 - **For nodes already finalized (in S):**
-  _Your answer here._
+  _The shortest distance possible to reach those nodes has been confirmed._
 
 - **For nodes not yet finalized (not in S):**
-  _Your answer here._
+  _Shortest distance possible has not been found to reach that node, only the current known shortest distance._
 
 ### Part 3b: Why Each Phase Holds
 
 > One to two bullets per phase. Maintenance must mention nonnegative edge weights.
 
 - **Initialization : why the invariant holds before iteration 1:**
-  _Your answer here._
+  _Before the first iteration, the only node in S is the source with distance 0, and the rest of the node's known distances are set to INF. The invariant holds because the shortest distance to source can only be 0, and all the other nodes have not been explored so their distance is unknown (INF)._
 
 - **Maintenance : why finalizing the min-dist node is always correct:**
-  _Your answer here._
+  _Every discovered node's distance is calculated using the weight from previous node, and then pushed to a priority queue that sorts by lowest weight first. This means that for a graph with nonnegative edge weights, only the closest node with the guaranteed shortest distance is used leading to shortest path, since adding other node paths can only add more distance._
 
 - **Termination : what the invariant guarantees when the algorithm ends:**
-  _Your answer here._
+  _The algorithm ends when the priority queue is empty, meaning all nodes have been finalized. The invariant guarantees the absolute shortest path to all finalized nodes._
 
 ### Part 3c: Why This Matters for the Route Planner
 
 > One sentence connecting correct distances to correct routing decisions.
 
-_Your answer here._
+_A correct route is built using multiple found shortest distances, so if the distances are incorrect the routing will also be incorrect._
 
 ---
 
@@ -105,17 +105,17 @@ _Your answer here._
 > State the failure mode. Then give a concrete counter-example using specific node names
 > or costs (you may use the illustration example from the spec). Three to five bullets.
 
-- **The failure mode:** _Your answer here._
-- **Counter-example setup:** _Your answer here._
-- **What greedy picks:** _Your answer here._
-- **What optimal picks:** _Your answer here._
-- **Why greedy loses:** _Your answer here._
+- **The failure mode:** _Greedy only knows the optimal distances from current node to the next, not overall best path._
+- **Counter-example setup:** _say we have Source S and edges S-C (1), S-D(2), C-D(100), D-C (1), C-T (1) and D-T (1)._
+- **What greedy picks:** _Greedy elects node C as next node to visit._
+- **What optimal picks:** _Optimal elects node D as the next node to visit._
+- **Why greedy loses:** _Starting at C forces greedy to take route S->C->D->T which is a total cost of (102) versus optimal route S->D->C->T (4), greedy doesn't consider how it's node order decisions affect the path later._
 
 ### What the Algorithm Must Explore
 
 > One bullet. Must use the word "order."
 
-- _Your answer here._
+- _The algorithm must consider all orders of required nodes visited, to yield the optimal path._
 
 ---
 
