@@ -159,23 +159,23 @@ _A correct route is built using multiple found shortest distances, so if the dis
 
 > Three bullets.
 
-- **What is tracked:** _Your answer here._
-- **When it is used:** _Your answer here._
-- **What it allows the algorithm to skip:** _Your answer here._
+- **What is tracked:** _best complete path so far._
+- **When it is used:** _To compare against other branches before traversing down._
+- **What it allows the algorithm to skip:** _When a potential route is less efficient than known best with the minimum next step._
 
 ### Part 6b: Lower Bound Estimation
 
 > Three bullets.
 
-- **What information is available at the current state:** _Your answer here._
-- **What the lower bound accounts for:** _Your answer here._
-- **Why it never overestimates:** _Your answer here._
+- **What information is available at the current state:** _The next cheapest distance._
+- **What the lower bound accounts for:** _The minimum cost of the next step of the current path._
+- **Why it never overestimates:** _Only considers cheapest next step, so it will always be less than or equal to the actual remaining cost of all steps._
 
 ### Part 6c: Pruning Correctness
 
 > One to two bullets. Explain why pruning is safe.
 
-- _Your answer here._
+- _If a branch has not reached the end, and it's cost is equal to or greater than best-so-far, then by definition it is not the optimal solution since there are relics left meaning additional cost_
 
 ---
 

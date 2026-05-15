@@ -205,14 +205,29 @@ def _explore(dist_table, current_loc, relics_remaining, relics_visited_order,
     None
         Updates best in place.
 
-    TODO
     Implement: base case, pruning, recursive case, backtracking.
 
     REQUIRED: Add a 1-2 sentence comment near your pruning condition
     explaining why it is safe (cannot skip the optimal solution).
     This comment is graded.
     """
-    pass
+    if not relics_remaining:
+        total_cost = cost_so_far + dist_table[current_loc][exit_node]
+        if(total_cost < best[0]):
+            best[0] = total_cost
+            best[1] = relics_visited_order
+        return
+    #If a solution has not reached the end and its current cost and the cheapest next move are greater than or equal to the best cost found, 
+    # it by definition cannot beat the optimal solution, 
+    lower_bound = cost_so_far + min(dist_table[current_loc][i] for i in relics_remaining)
+    if(lower_bound >= best[0]):
+        return 
+    for relic in relics_remaining:
+        relics_remaining.remove(relic)
+        relics_visited_order.append(relic)
+        _explore(dist_table, relic, relics_remaining, relics_visited_order, cost_so_far + dist_table[current_loc][relic], exit_node, best)
+        relics_visited_order.pop()
+        relics_remaining.add(relic)
 
 
 # =============================================================================
@@ -236,7 +251,8 @@ def solve(graph, spawn, relics, exit_node):
 
     TODO
     """
-    pass
+    dist_table = precompute_distances(graph, spawn, relics, exit_node)
+    return find_optimal_route(dist_table, spawn, relics, exit_node)
 
 
 # =============================================================================
