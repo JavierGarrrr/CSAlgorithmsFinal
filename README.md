@@ -128,7 +128,7 @@ _A correct route is built using multiple found shortest distances, so if the dis
 
 | Component | Variable name in code | Data type | Description |
 |---|---|---|---|
-| Current location | node | tuple | information about location in graph |
+| Current location | current_loc | node | information about location in graph |
 | Relics already collected | relics_remaining | set | relics left to visit |
 | Fuel cost so far | cost_so_far | float | tracks total cost |
 
@@ -183,4 +183,4 @@ _A correct route is built using multiple found shortest distances, so if the dis
 
 > Bullet list. If none beyond lecture notes, write that.
 
-- _Your references here._
+- _lecture notes and class materials_

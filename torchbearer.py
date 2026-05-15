@@ -2,8 +2,8 @@
 CS 460 – Algorithms: Final Programming Assignment
 The Torchbearer
 
-Student Name: ___________________________
-Student ID:   ___________________________
+Student Name: Javier Garcia Ramirez
+Student ID:   828165956
 
 INSTRUCTIONS
 ------------
@@ -34,7 +34,14 @@ def explain_problem():
 
     TODO
     """
-    return "TODO"
+    return (
+        "Why a single shortest-path run from S is not enough:\n"
+        "The problem type requires shortest-path to visit a set of required nodes, not shortest paths from S to other nodes. A single shortest-path run would give you the most efficient ways to connect to other nodes from Start but not how to reach required nodes.\n"
+        "What decision remains after all inter-location costs are known:\n"
+        "Deciding the optimal order in which to visit locations.\n"
+        "Why this requires a search over orders (one sentence):\n"
+        "To find the best order you must compare all different order combinations because different orders of locations visited may yield different costs.\n"
+    )
 
 
 # =============================================================================
@@ -58,6 +65,7 @@ def select_sources(spawn, relics, exit_node):
     sources_list = []
     sources_list.append(spawn)
     sources_list.extend(relics)
+    #keeps unique sources only through set
     unique_sources = list(set(sources_list))
     return unique_sources
 
@@ -77,6 +85,7 @@ def run_dijkstra(graph, source):
         Unreachable nodes map to float('inf').
 
     """
+    #init
     pq = []
     dist = {key: float('inf') for key in graph}
     dist[source] = 0
@@ -111,6 +120,7 @@ def precompute_distances(graph, spawn, relics, exit_node):
     """
     sources = select_sources(spawn, relics, exit_node)
     sources_table = {}
+    #find shortest path using all relics as sources
     for source in sources:
         sources_table[source] = run_dijkstra(graph, source)
     return sources_table
@@ -132,8 +142,19 @@ def dijkstra_invariant_check():
 
     TODO
     """
-    return "TODO"
-
+    return (
+    "For nodes already finalized (in S):\n"
+    "The shortest distance possible to reach those nodes has been confirmed.\n"
+    "For nodes not yet finalized (not in S):\n"
+    "Shortest distance possible has not been found to reach that node, only the current known shortest distance.\n"
+    "Initialization : why the invariant holds before iteration 1:\n"
+    "Before the first iteration, the only node in S is the source with distance 0, and the rest of the node's known distances are set to INF. The invariant holds because the shortest distance to source can only be 0, and all the other nodes have not been explored so their distance is unknown (INF).\n"
+    "Maintenance : why finalizing the min-dist node is always correct:\n"
+    "Every discovered node's distance is calculated using the weight from previous node, and then pushed to a priority queue that sorts by lowest weight first. This means that for a graph with nonnegative edge weights, only the closest node with the guaranteed shortest distance is used leading to shortest path, since adding other node paths can only add more distance.\n"
+    "Termination : what the invariant guarantees when the algorithm ends:\n"
+    "The algorithm ends when the priority queue is empty, meaning all nodes have been finalized. The invariant guarantees the absolute shortest path to all finalized nodes.\n"
+    "A correct route is built using multiple found shortest distances, so if the distances are incorrect the routing will also be incorrect.\n"
+    )
 
 # =============================================================================
 # PART 4
@@ -149,8 +170,14 @@ def explain_search():
 
     TODO
     """
-    return "TODO"
-
+    return (
+        "The failure mode: Greedy only knows the optimal distances from current node to the next, not overall best path.\n"
+        "Counter-example setup: say we have Source S and edges S-C (1), S-D(2), C-D(100), D-C (1), C-T (1) and D-T (1).\n"
+        "What greedy picks: Greedy elects node C as next node to visit.\n"
+        "What optimal picks: Optimal elects node D as the next node to visit.\n"
+        "Why greedy loses: Starting at C forces greedy to take route S->C->D->T which is a total cost of (102) versus optimal route S->D->C->T (4), greedy doesn't consider how it's node order decisions affect the path later.\n"
+        "The algorithm must consider all orders of required nodes visited, to yield the optimal path.\n"
+    )
 
 # =============================================================================
 # PARTS 5 + 6
@@ -174,10 +201,12 @@ def find_optimal_route(dist_table, spawn, relics, exit_node):
         (minimum_fuel_cost, ordered_relic_list)
         Returns (float('inf'), []) if no valid route exists.
     """
+    #init
     relics_remaining = set(relics)
     relics_visited_order =[]
     cost_so_far = 0
     best = [float('inf'), []]
+    #run
     _explore(dist_table, spawn, relics_remaining, relics_visited_order, cost_so_far, exit_node, best)
     return best
 
@@ -211,8 +240,11 @@ def _explore(dist_table, current_loc, relics_remaining, relics_visited_order,
     explaining why it is safe (cannot skip the optimal solution).
     This comment is graded.
     """
+    #base case
     if not relics_remaining:
+        #include distance to last node
         total_cost = cost_so_far + dist_table[current_loc][exit_node]
+        #update
         if(total_cost < best[0]):
             best[0] = total_cost
             best[1] = relics_visited_order
@@ -222,10 +254,13 @@ def _explore(dist_table, current_loc, relics_remaining, relics_visited_order,
     lower_bound = cost_so_far + min(dist_table[current_loc][i] for i in relics_remaining)
     if(lower_bound >= best[0]):
         return 
-    for relic in relics_remaining:
+    #go down list of relics
+    for relic in list(relics_remaining):
         relics_remaining.remove(relic)
         relics_visited_order.append(relic)
+        #recursive call to continue down path
         _explore(dist_table, relic, relics_remaining, relics_visited_order, cost_so_far + dist_table[current_loc][relic], exit_node, best)
+        #backtrack
         relics_visited_order.pop()
         relics_remaining.add(relic)
 
@@ -251,6 +286,7 @@ def solve(graph, spawn, relics, exit_node):
 
     TODO
     """
+    #run algorithms
     dist_table = precompute_distances(graph, spawn, relics, exit_node)
     return find_optimal_route(dist_table, spawn, relics, exit_node)
 
