@@ -54,7 +54,7 @@
 
 > State the total complexity and show the arithmetic. Two to three lines max.
 
-- **Number of Dijkstra runs:** _Rk + 1_
+- **Number of Dijkstra runs:** _k + 1_
 - **Cost per run:** _O(m log n)_
 - **Total complexity:** _O(m log n + k (m log n) )_
 - **Justification (one line):** _Djikstra's runs once from source node and then runs once for each required node_
