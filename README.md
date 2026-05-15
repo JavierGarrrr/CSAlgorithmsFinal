@@ -36,7 +36,7 @@
 | Source Node Type | Why it is a source |
 |---|---|
 | _S_ | _Required start node_ |
-| _Rk_ | _Find optimal distances to to other required nodes_ |
+| _k_ | _Find optimal distances to to other required nodes_ |
 
 ### Part 2b: Distance Storage
 
