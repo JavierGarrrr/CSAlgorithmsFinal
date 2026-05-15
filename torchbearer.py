@@ -247,7 +247,7 @@ def _explore(dist_table, current_loc, relics_remaining, relics_visited_order,
         #update
         if(total_cost < best[0]):
             best[0] = total_cost
-            best[1] = relics_visited_order
+            best[1] = list(relics_visited_order)
         return
     #If a solution has not reached the end and its current cost and the cheapest next move are greater than or equal to the best cost found, 
     # it by definition cannot beat the optimal solution, 
